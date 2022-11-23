@@ -33,7 +33,7 @@ public class Repeater implements IRepeater{
     @Override
     public IRepeater waiting() {
         try {
-            wait(delayTime);
+            Thread.sleep(delayTime);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
