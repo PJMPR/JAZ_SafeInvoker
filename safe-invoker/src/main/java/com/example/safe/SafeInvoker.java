@@ -13,9 +13,14 @@ public class SafeInvoker implements SafeInvoking{
 
     @Override
     public InvokerResult SafeInvoke(NotSafeAction action) {
-        /*
-            Tutaj Twoim zadaniem jest napisanie odpowiedniego algorytmu
-         */
-        return null;
+        try{
+            action.execute();
+        }catch (Exception exception){
+            repeater.For(exception).waiting().retry();
+            if(repeater.shouldRetry())
+                return SafeInvoke(action);
+            else return InvokerResult.error(exception);
+        }
+        return InvokerResult.success();
     }
 }

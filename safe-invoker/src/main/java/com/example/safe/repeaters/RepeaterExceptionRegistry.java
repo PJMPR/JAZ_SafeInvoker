@@ -17,16 +17,11 @@ public class RepeaterExceptionRegistry  implements IRepeaterExceptionRegistry{
 
     @Override
     public void add(Class<? extends Throwable> exceptionClass, int retries, long delay) {
-        /*
-            Tutaj Twoim zadaniem jest napisanie odpowiedniego algorytmu
-         */
+        registry.put(exceptionClass.getName(), new RegistryEntry(exceptionClass.getName(), delay, retries));
     }
 
     @Override
     public  RegistryEntry EntryFor(Throwable exception) {
-        /*
-            Tutaj Twoim zadaniem jest napisanie odpowiedniego algorytmu
-         */
-        return null;
+        return registry.getOrDefault(exception.getClass().getName(), RegistryEntry.Default(exception));
     }
 }

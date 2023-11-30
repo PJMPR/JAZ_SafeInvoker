@@ -16,5 +16,14 @@ public interface SafeInvoking {
             if(isSuccess)return;
             consumer.accept(exception);
         }
+
+        public static InvokerResult success(){
+            return new InvokerResult(null, true);
+        }
+
+        public static InvokerResult error(Exception exception){
+            return new InvokerResult(exception, false);
+        }
+
     }
 }

@@ -15,10 +15,10 @@ public class SafeInvokerConfiguration {
      * Niech Spring w swoim kontenerze DI
      * ma zarejestrowany singleton klasy RepeaterExceptionRegistry
      */
-//    @Bean
-//    public RepeaterExceptionRegistry getRegistry(){
-//        return RepeaterExceptionRegistry.getInstance();
-//    }
+    @Bean
+    public RepeaterExceptionRegistry getRegistry(){
+        return RepeaterExceptionRegistry.getInstance();
+    }
 
     /**
      * Niech Spring w swoim kontenerze DI
@@ -27,11 +27,11 @@ public class SafeInvokerConfiguration {
      *      że za każdym razem jak Obiekt tego typu będzie potrzebny,
      *      to Spring utworzy jego nową instancję
      */
-//    @Bean
-//    @Scope("prototype")
-//    public Repeater repeater(RepeaterExceptionRegistry registry){
-//        return new Repeater(registry);
-//    }
+    @Bean
+    @Scope("prototype")
+    public Repeater repeater(RepeaterExceptionRegistry registry){
+        return new Repeater(registry);
+    }
 
     /**
      * Niech Spring w swoim kontenerze DI
@@ -40,9 +40,9 @@ public class SafeInvokerConfiguration {
      *      że za każdym razem jak Obiekt tego typu będzie potrzebny,
      *      to Spring utworzy jego nową instancję
      */
-//    @Bean
-//    @Scope("prototype")
-//    public SafeInvoker safeInvoker(IRepeater repeater){
-//        return new SafeInvoker(repeater);
-//    }
+    @Bean
+    @Scope("prototype")
+    public SafeInvoker safeInvoker(IRepeater repeater){
+        return new SafeInvoker(repeater);
+    }
 }

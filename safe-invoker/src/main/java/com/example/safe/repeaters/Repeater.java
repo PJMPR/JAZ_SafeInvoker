@@ -2,7 +2,7 @@ package com.example.safe.repeaters;
 
 
 public class Repeater implements IRepeater{
-    String exceptionName;
+    String exceptionName="";
     int counter;
     int retryCount;
     long delayTime;
@@ -14,14 +14,19 @@ public class Repeater implements IRepeater{
 
     @Override
     public IRepeater For(Throwable exception) {
-        /*
-            Tutaj Twoim zadaniem jest napisanie odpowiedniego algorytmu
-         */
-        return null;
+        if(exceptionName.equals(exception.getClass().getName()))
+            return this;
+        var entry = exceptionRegistry.EntryFor(exception);
+        exceptionName= entry.exceptionName();
+        retryCount= entry.retriesCount();
+        delayTime= entry.delay();
+        counter=0;
+        return this;
     }
 
     @Override
     public void retry() {
+
         counter++;
     }
 
